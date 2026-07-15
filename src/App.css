@@ -1,0 +1,7 @@
+.img-card-container::-webkit-scrollbar {
+    display: hide;
+}
+
+
+
+@import "tailwindcss";
