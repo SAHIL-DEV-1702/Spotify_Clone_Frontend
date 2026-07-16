@@ -2,18 +2,15 @@ import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
 
 export default function Home() {
-    const musics = Array.from({ length: 20 }, (_, index) => ({
-        _id: index,
-        title: `Song ${index + 1}`,
-        artist: "Unknown Artist",
-    }));
+
+    const musics = [1, 2, 3, 4, 5, 66, 7, 7, 8, 8,]
 
     return (
         <div className="min-h-screen bg-zinc-950 text-white">
             <Navbar />
 
             <main className="mx-auto max-w-7xl px-6 py-8">
-               
+
                 <section className="mb-10 rounded-2xl bg-linear-to-r from-green-500 to-emerald-700 p-8">
                     <h1 className="text-4xl font-bold">
                         Welcome Back 👋
@@ -29,7 +26,7 @@ export default function Home() {
                     </button>
                 </section>
 
-                
+
                 <section className="mb-10">
                     <div className="mb-5 flex items-center justify-between">
                         <h2 className="text-2xl font-bold">
@@ -51,7 +48,7 @@ export default function Home() {
                     </div>
                 </section>
 
-          
+
                 <section className="mb-10">
                     <div className="mb-5 flex items-center justify-between">
                         <h2 className="text-2xl font-bold">
@@ -66,14 +63,14 @@ export default function Home() {
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                         {musics.map((music) => (
                             <MusicCard
-                                key={music._id}
+                                key={music._id || music.index}
                                 music={music}
                             />
                         ))}
                     </div>
                 </section>
 
-                
+
                 <section>
                     <div className="mb-5 flex items-center justify-between">
                         <h2 className="text-2xl font-bold">

@@ -1,6 +1,9 @@
 import { Music2, UploadCloud } from "lucide-react";
 
 export default function UploadMusic() {
+
+    
+
     return (
         <div className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
             <div className="mx-auto max-w-4xl">

@@ -5,18 +5,23 @@ import Login from './pages/Login.jsx'
 import { Routes, Route } from 'react-router-dom'
 import Register from './pages/Register.jsx'
 import Home from './pages/Home.jsx'
-
+import UploadMusic from "./pages/UploadMusic.jsx"
 
 
 function App() {
 
+
+
   return (
+
     <>
       <Routes>
 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
+        <Route path="/" element={<Home />} />
+        <Route path="/upload" element={<UploadMusic />} />
+
 
       </Routes>
 
@@ -35,6 +40,7 @@ function App() {
 
 
     </>
+
   )
 }
 
