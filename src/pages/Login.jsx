@@ -1,24 +1,31 @@
 import { Link } from "react-router-dom";
 import { LogIn, Music2 } from "lucide-react";
 import { useState } from "react";
-
+import { login } from '../service/authApi.js'
 
 export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+
+
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(email, password)
+        const res = login({ email, password })
+        console.log(res);
+
     }
+
 
     const emailHandle = (e) => {
         setEmail(e.target.value)
     }
+
     const passwordHandle = (e) => {
         setPassword(e.target.value)
     }
+
 
 
     return (
@@ -44,7 +51,7 @@ export default function Login() {
                     <form className="space-y-5" onSubmit={submitHandler} >
                         <div>
                             <label className="mb-2 block text-sm text-zinc-300">
-                                {email}
+                                Email
                             </label>
 
                             <input
@@ -52,18 +59,20 @@ export default function Login() {
                                 placeholder="Enter your email"
                                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none focus:border-green-500"
                                 onChange={emailHandle}
+                                value={email}
                             />
                         </div>
 
                         <div>
                             <label className="mb-2 block text-sm text-zinc-300">
-                                {password}
+                                password
                             </label>
 
                             <input
                                 type="password"
                                 placeholder="Enter your password"
                                 className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none focus:border-green-500" onChange={passwordHandle}
+                                value={password}
                             />
                         </div>
 

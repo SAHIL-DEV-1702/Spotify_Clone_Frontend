@@ -2,7 +2,7 @@ import API from "../service/api"
 
 
 
-export const getAllMusic = () => API.get("/getallmusic");
+export const getAllMusic = () => API.get("/music/getallmusic");
 
 
 export const uploadMusic = (formData) =>
@@ -17,11 +17,6 @@ export const getMusicById = (id) =>
     API.get(`/music/${id}`);
 
 
-export const createAlbum = () => API.post("/album")
-
-export const getAlbums = () => API.post("/getAlbums")
-
-export const getAlbumById = () => API.get("/albums/:albumId")
 
 
 

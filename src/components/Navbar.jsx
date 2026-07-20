@@ -6,13 +6,18 @@ import {
     Home,
     Music2,
     Menu,
+    LogIn,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Navbar({ role = "user" }) {
+
+
+
     return (
         <header className="sticky top-0 z-50 border-b border-zinc-800 bg-zinc-950/90 backdrop-blur-md">
             <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-                {/* Left */}
+
                 <div className="flex items-center gap-8">
                     <div className="flex items-center gap-2">
                         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500">
@@ -24,16 +29,16 @@ export default function Navbar({ role = "user" }) {
                         </h1>
                     </div>
 
-                    {/* Desktop Navigation */}
+
                     <nav className="hidden items-center gap-6 lg:flex">
-                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white">
+                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" >
                             <Home size={18} />
-                            Home
+                            <Link to="/home">Home</Link>
                         </button>
 
                         <button className="flex items-center gap-2 text-gray-400 transition hover:text-white">
-                            <Music2 size={18} />
-                            Browse
+                            <LogIn size={18} />
+                            <Link to="/login">Login</Link>
                         </button>
 
                         <button className="flex items-center gap-2 text-gray-400 transition hover:text-white">
@@ -43,7 +48,8 @@ export default function Navbar({ role = "user" }) {
                     </nav>
                 </div>
 
-                {/* Search */}
+
+
                 <div className="hidden w-full max-w-md lg:block">
                     <div className="flex items-center rounded-full bg-zinc-900 px-4 py-2">
                         <Search size={18} className="text-gray-400" />
@@ -56,7 +62,8 @@ export default function Navbar({ role = "user" }) {
                     </div>
                 </div>
 
-                {/* Right */}
+
+
                 <div className="flex items-center gap-3">
                     {role === "artist" && (
                         <button className="hidden items-center gap-2 rounded-full bg-green-500 px-4 py-2 font-medium text-black transition hover:scale-105 lg:flex">

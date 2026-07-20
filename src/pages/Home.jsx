@@ -1,9 +1,26 @@
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
+import { getAllMusic } from "../service/musicApi";
+import { toast } from "react-toastify";
+
 
 export default function Home() {
 
-    const musics = [1, 2, 3, 4, 5, 66, 7, 7, 8, 8,]
+    const [music, setMusic] = useState([])
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const res = await getAllMusic()
+            setMusic(res.data);
+        };
+
+        fetchData();
+    }, []);
+
+    toast.success("Home Page")
+
 
     return (
         <div className="min-h-screen bg-zinc-950 text-white">
@@ -39,7 +56,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {music.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
@@ -61,9 +78,9 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {music.map((music) => (
                             <MusicCard
-                                key={music._id || music.index}
+                                key={music._id}
                                 music={music}
                             />
                         ))}
@@ -83,7 +100,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {music.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
