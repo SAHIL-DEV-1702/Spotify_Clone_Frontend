@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { UserPlus, Music2 } from "lucide-react";
 import { useState } from "react";
 import { register } from "../service/authApi";
+import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
 
+    const navigate = useNavigate();
     const [formdata, setFormdata] = useState({
         name: "",
         email: "",
@@ -24,10 +27,15 @@ export default function Register() {
     const submitHandle = async (e) => {
         e.preventDefault()
         try {
-            const res = await register(formdata);
+            const res = await register(formdata.data);
+            navigate("/")
+            toast.info("register sucessfully");
+
             console.log(res.data);
+
         } catch (err) {
-            console.log(err);
+            toast.error(`${err.response.data}`)
+            console.log(err.response.data);
         }
     }
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
 import { getAllMusic } from "../service/musicApi";
-import { toast } from "react-toastify";
+
 
 
 export default function Home() {
@@ -18,9 +18,6 @@ export default function Home() {
 
         fetchData();
     }, []);
-
-    toast.success("Home Page")
-
 
     return (
         <div className="min-h-screen bg-zinc-950 text-white">

@@ -1,20 +1,22 @@
-import { Link } from "react-router-dom";
+import { useNavigate,Link} from "react-router-dom";
 import { LogIn, Music2 } from "lucide-react";
 import { useState } from "react";
 import { login } from '../service/authApi.js'
+import { toast } from "react-toastify";
 
 export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const navigate = useNavigate();
 
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
-        const res = login({ email, password })
-        console.log(res);
-
+        const res = await login({ email, password })
+        navigate("/home")
+        toast.success("Login Sucess", res)
     }
 
 

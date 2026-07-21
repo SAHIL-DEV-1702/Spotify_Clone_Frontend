@@ -35,6 +35,7 @@ function App() {
         position="top-right"
         autoClose={2000}
         theme="colored"
+        limit={1}
       />
 
       <div className="img-card-container min-h-screen w-full bg-white-40 border-2 border-black flex flex-col justify-center overflow-scroll hide-scrollbar">

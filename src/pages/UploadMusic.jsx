@@ -4,15 +4,13 @@ import { uploadMusic } from "../service/musicApi"
 
 export default function UploadMusic() {
     const [formData, setFormData] = useState({
-        songTitle: "",
+        title: "",
         album: "",
-        genre: "",
         language: "",
-        file: null,
-        description: "",
+        music: "",
+
     });
 
-    // Text inputs, textarea, select
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -22,11 +20,11 @@ export default function UploadMusic() {
         }));
     };
 
-    // File input
+
     const handleFileChange = (e) => {
         setFormData((prev) => ({
             ...prev,
-            file: e.target.files[0],
+            music: e.target.files[0],
         }));
     };
 
@@ -35,15 +33,13 @@ export default function UploadMusic() {
 
         const data = new FormData();
 
-        data.append("songTitle", formData.songTitle);
+        data.append("title", formData.title);
         data.append("album", formData.album);
-        data.append("genre", formData.genre);
         data.append("language", formData.language);
-        data.append("description", formData.description);
-        data.append("file", formData.file);
+        data.append("music", formData.music);
 
-        console.log(formData);
-        console.log(data);
+        console.log(formData, "form data printed");
+
 
         uploadMusic(formData);
     };
@@ -65,7 +61,7 @@ export default function UploadMusic() {
                     encType="multipart/form-data"
                 >
 
-                    {/* Song Title */}
+
                     <div>
                         <label className="mb-2 block text-sm font-medium">
                             Song Title
@@ -73,15 +69,15 @@ export default function UploadMusic() {
 
                         <input
                             type="text"
-                            name="songTitle"
-                            value={formData.songTitle}
+                            name="title"
+                            value={formData.title}
                             onChange={handleChange}
                             placeholder="Enter song title"
                             className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 outline-none focus:border-green-500"
                         />
                     </div>
 
-                    {/* Album */}
+
                     <div>
                         <label className="mb-2 block text-sm font-medium">
                             Album
@@ -99,29 +95,7 @@ export default function UploadMusic() {
 
                     <div className="grid gap-5 md:grid-cols-2">
 
-                        {/* Genre */}
-                        <div>
-                            <label className="mb-2 block text-sm font-medium">
-                                Genre
-                            </label>
 
-                            <select
-                                name="genre"
-                                value={formData.genre}
-                                onChange={handleChange}
-                                className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 outline-none focus:border-green-500"
-                            >
-                                <option value="">Select Genre</option>
-                                <option value="Pop">Pop</option>
-                                <option value="Rock">Rock</option>
-                                <option value="Hip Hop">Hip Hop</option>
-                                <option value="Jazz">Jazz</option>
-                                <option value="Classical">Classical</option>
-                                <option value="Electronic">Electronic</option>
-                            </select>
-                        </div>
-
-                        {/* Language */}
                         <div>
                             <label className="mb-2 block text-sm font-medium">
                                 Language
@@ -139,7 +113,7 @@ export default function UploadMusic() {
 
                     </div>
 
-                    {/* Music File */}
+
                     <div>
                         <label className="mb-3 block text-sm font-medium">
                             Music File
@@ -153,35 +127,29 @@ export default function UploadMusic() {
                                 Upload MP3 File
                             </h3>
 
-                            <p className="mt-2 text-sm text-zinc-400">
-                                Click to browse or drag & drop your music here
-                            </p>
+
+                            <div>
+                                {formData.music ? (<p className="mt-2 text-sm text-zinc-400">
+                                    {formData.music.name}
+                                </p>) : (<p className="mt-2 text-sm text-zinc-400">
+                                    Click to browse or drag & drop your music here
+                                </p>)}
+                            </div>
+
+
 
                             <input
                                 type="file"
-                                name="file"
+                                name="music"
                                 accept=".mp3,audio/*"
                                 onChange={handleFileChange}
                                 className="hidden"
+
                             />
                         </label>
                     </div>
 
-                    {/* Description */}
-                    <div>
-                        <label className="mb-2 block text-sm font-medium">
-                            Description
-                        </label>
 
-                        <textarea
-                            rows={5}
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            placeholder="Tell listeners about this track..."
-                            className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 outline-none focus:border-green-500"
-                        />
-                    </div>
 
                     <div className="flex justify-end gap-4 pt-4">
                         <button
