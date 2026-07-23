@@ -57,7 +57,7 @@ export default function Navbar({ role = "user" }) {
                             <Link to="/login">Login</Link>
                         </button>
 
-                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}}>
+                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
                         <LogOutIcon size={18} />
                         Logout
                     </button>
