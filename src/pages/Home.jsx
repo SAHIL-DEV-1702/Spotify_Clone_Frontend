@@ -2,22 +2,30 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
 import { getAllMusic } from "../service/musicApi";
-
+import { toast } from "react-toastify";
 
 
 export default function Home() {
 
-    const [music, setMusic] = useState([])
+    const [musics, setMusics] = useState([])
 
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await getAllMusic()
-            setMusic(res.data);
+            try {
+                const res = await getAllMusic()
+                setMusics(res.data.musics);
+                console.log(res.data.musics, "musics log")
+                console.log(res.data, "data")
+            } catch (error) {
+                toast(error.repsponse?.data?.messege)
+            }
         };
-
         fetchData();
     }, []);
+
+
+
 
     return (
         <div className="min-h-screen bg-zinc-950 text-white">
@@ -53,7 +61,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {music.map((music) => (
+                        {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
@@ -75,7 +83,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {music.map((music) => (
+                        {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
@@ -97,7 +105,7 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {music.map((music) => (
+                        {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}

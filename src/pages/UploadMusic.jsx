@@ -1,8 +1,14 @@
-import { Music2, UploadCloud } from "lucide-react";
+import { Music2, UploadCloud, LogOutIcon } from "lucide-react";
 import { useState } from "react";
 import { uploadMusic } from "../service/musicApi"
+import { toast } from "react-toastify"
+import { logout } from "../service/authApi";
+
 
 export default function UploadMusic() {
+
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         title: "",
         album: "",
@@ -10,6 +16,7 @@ export default function UploadMusic() {
         music: "",
 
     });
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,6 +27,9 @@ export default function UploadMusic() {
         }));
     };
 
+    const onClick = async () => {
+        await logout()
+    }
 
     const handleFileChange = (e) => {
         setFormData((prev) => ({
@@ -28,7 +38,7 @@ export default function UploadMusic() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const data = new FormData();
@@ -40,13 +50,29 @@ export default function UploadMusic() {
 
         console.log(formData, "form data printed");
 
+        try {
+            setLoading(true)
+            await uploadMusic(data);
+            toast("Music Uploaded")
+        }
+        catch (error) {
+            console.log(error)
+            toast.error("Upload Failed");
+        }
+        finally {
+            setLoading(false);
+        }
 
-        uploadMusic(formData);
     };
 
     return (
         <div className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
             <div className="mx-auto max-w-4xl">
+
+                <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClick}>
+                    <LogOutIcon size={18} />
+                    Logout
+                </button>
 
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold">Upload Music</h1>
@@ -162,9 +188,16 @@ export default function UploadMusic() {
                         <button
                             type="submit"
                             className="flex items-center gap-2 rounded-lg bg-green-500 px-6 py-3 font-semibold text-black hover:bg-green-400"
-                        >
+                            disabled={loading} >
                             <UploadCloud size={20} />
-                            Upload Music
+                            {loading ? (
+                                <>
+                                    <div className="mr-2 h-5 w-5 animate-spin rounded-full border-2 border-black border-t-transparent"></div>
+                                    Uploading...
+                                </>
+                            ) : (
+                                "Upload Music"
+                            )}
                         </button>
                     </div>
 

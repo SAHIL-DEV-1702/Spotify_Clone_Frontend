@@ -12,8 +12,11 @@ export default function Register() {
         name: "",
         email: "",
         password: "",
+        role: "user"
 
     })
+
+    console.log(formdata)
 
     const handlechange = (e) => {
 
@@ -27,15 +30,16 @@ export default function Register() {
     const submitHandle = async (e) => {
         e.preventDefault()
         try {
-            const res = await register(formdata.data);
-            navigate("/")
-            toast.info("register sucessfully");
+            const res = await register(formdata);
 
-            console.log(res.data);
+            { (formdata.user === "User||user" ? navigate("/Home") : navigate("/upload")) }
+
+            toast.info("register sucessfully");
+            console.log(res);
 
         } catch (err) {
-            toast.error(`${err.response.data}`)
-            console.log(err.response.data);
+
+            console.log(err.response.status, err.response.data);
         }
     }
 
@@ -109,7 +113,7 @@ export default function Register() {
                             Role
                         </label>
 
-                        <select className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none focus:border-green-500">
+                        <select className="w-full rounded-lg border border-zinc-700 bg-zinc-800 px-4 py-3 text-white outline-none focus:border-green-500" name="role" value={formdata.role} onChange={handlechange}>
                             <option value="user" >User</option>
                             <option value="artist">Artist</option>
                         </select>

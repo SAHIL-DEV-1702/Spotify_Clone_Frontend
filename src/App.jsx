@@ -11,9 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
-
-
-
 function App() {
 
 
@@ -23,9 +20,9 @@ function App() {
     <>
       <Routes>
 
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/Home" element={<Home />} />
         <Route path="/upload" element={<UploadMusic />} />
 
 

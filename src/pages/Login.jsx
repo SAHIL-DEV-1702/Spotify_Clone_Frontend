@@ -1,22 +1,43 @@
-import { useNavigate,Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { LogIn, Music2 } from "lucide-react";
 import { useState } from "react";
 import { login } from '../service/authApi.js'
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { AuthContext } from "../contextApi/AuthContext.jsx";
 
 export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const { setUser } = useContext(AuthContext);
+
     const navigate = useNavigate();
 
 
     const submitHandler = async (e) => {
         e.preventDefault()
-        const res = await login({ email, password })
-        navigate("/home")
-        toast.success("Login Sucess", res)
+
+        try {
+            const res = await login({ email, password })
+
+            setUser(res.data.user);
+            console.log(res.data.user)
+
+            if (res.data.user.role === "artist") {
+                navigate("/upload");
+            } else {
+                navigate("/");
+            }
+
+            toast.success("Login Success")
+
+        } catch (error) {
+            console.log(error.response)
+            console.log(error.response.data)
+            toast.error(error.response?.data?.message);
+        }
     }
 
 
