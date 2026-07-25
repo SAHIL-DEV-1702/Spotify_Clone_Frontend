@@ -3,12 +3,16 @@ import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
 import { getAllMusic } from "../service/musicApi";
 import { toast } from "react-toastify";
-
+import { useRef } from "react";
+import MusicPlayer from "../components/MusicPlayer";
 
 export default function Home() {
 
     const [musics, setMusics] = useState([])
 
+    const [currentSong, setCurrentSong] = useState(null);
+
+    const audioRef = useRef(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +28,9 @@ export default function Home() {
         fetchData();
     }, []);
 
-
+    useEffect(() => {
+        console.log(currentSong);
+    }, [currentSong]);
 
 
     return (
@@ -60,11 +66,12 @@ export default function Home() {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                         {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
+                                onPlay={setCurrentSong}
                             />
                         ))}
                     </div>
@@ -82,11 +89,12 @@ export default function Home() {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                         {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
+                                onPlay={setCurrentSong}
                             />
                         ))}
                     </div>
@@ -104,16 +112,21 @@ export default function Home() {
                         </button>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                         {musics.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
+                                onPlay={setCurrentSong}
                             />
                         ))}
                     </div>
                 </section>
             </main>
+
+            <MusicPlayer
+                currentSong={currentSong}
+                audioRef={audioRef} />
         </div>
     );
 }

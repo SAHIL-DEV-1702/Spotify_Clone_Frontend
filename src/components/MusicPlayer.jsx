@@ -1,3 +1,4 @@
+
 import {
     Play,
     Pause,
@@ -7,12 +8,59 @@ import {
     Heart,
 } from "lucide-react";
 
-export default function MusicPlayer() {
+
+import { useState, useEffect } from "react";
+
+export default function MusicPlayer({ currentSong, audioRef }) {
+
+    const [isPlaying, setIsPlaying] = useState(true);
+
+    const togglePlay = () => {
+        if (isPlaying) {
+            audioRef.current.pause();
+        } else {
+            audioRef.current.play();
+        }
+
+        setIsPlaying(!isPlaying);
+    };
+
+    // const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+
+
+    const skipBack = () => {
+        audioRef.current.currentTime -= 5
+    }
+
+    const skipForward = () => {
+        audioRef.current.currentTime += 5
+    }
+
+    useEffect(() => {
+        const audio = audioRef.current;
+
+        const handleLoadedMetadata = () => {
+            setDuration(audio.duration);
+        };
+
+        audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+
+        return () => {
+            audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+        };
+
+
+    }, [audioRef, currentSong])
+
+
+
+    if (!currentSong) return null;
     return (
         <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-950 px-6 py-4">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
 
-                {/* Song Info */}
+
                 <div className="flex w-1/4 items-center gap-4">
                     <img
                         src="https://picsum.photos/80"
@@ -22,34 +70,39 @@ export default function MusicPlayer() {
 
                     <div>
                         <h3 className="font-semibold text-white">
-                            Blinding Lights
+                            {currentSong.title}
                         </h3>
 
                         <p className="text-sm text-zinc-400">
-                            The Weeknd
+                            {currentSong.artist.name}
                         </p>
                     </div>
 
                     <button className="text-zinc-400 hover:text-red-500">
-                        <Heart size={20} />
+                        <Heart size={20} color="red" />
                     </button>
                 </div>
 
-                {/* Controls */}
+
                 <div className="flex w-2/4 flex-col items-center">
                     <div className="mb-2 flex items-center gap-6">
-                        <button className="text-zinc-300 hover:text-white">
+                        <button className="text-zinc-300 hover:text-white" onClick={skipBack}>
                             <SkipBack size={22} />
                         </button>
 
-                        <button className="rounded-full bg-white p-3 text-black hover:scale-105">
-                            <Play size={22} fill="black" />
-                            {/* Replace with <Pause /> when music is playing */}
+                        <button className="rounded-full bg-white p-3 text-black hover:scale-105"
+                            onClick={() => togglePlay} >
+
+                            {isPlaying ? <Play size={22} fill="black" />
+                                : <Pause size={22} fill="black" />
+                            }
+
                         </button>
 
-                        <button className="text-zinc-300 hover:text-white">
+                        <button className="text-zinc-300 hover:text-white" onClick={skipForward}>
                             <SkipForward size={22} />
                         </button>
+
                     </div>
 
                     <div className="flex w-full items-center gap-3">
@@ -63,11 +116,11 @@ export default function MusicPlayer() {
                             className="w-full accent-green-500"
                         />
 
-                        <span className="text-xs text-zinc-400">3:45</span>
+                        <span className="text-xs text-zinc-400">{duration}</span>
                     </div>
                 </div>
 
-                {/* Volume */}
+
                 <div className="flex w-1/4 items-center justify-end gap-3">
                     <Volume2 size={20} className="text-zinc-300" />
 
@@ -77,10 +130,19 @@ export default function MusicPlayer() {
                         max="100"
                         defaultValue="70"
                         className="w-28 accent-green-500"
+                        onClick={""}
                     />
                 </div>
 
             </div>
+
+            <audio
+                ref={audioRef}
+                src={currentSong.url}
+                autoPlay
+            />
+
         </footer>
+
     );
 }

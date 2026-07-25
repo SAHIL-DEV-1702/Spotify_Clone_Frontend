@@ -6,11 +6,11 @@ import {
 } from "lucide-react";
 
 
-export default function MusicCard({ music }) {
+export default function MusicCard({ music, onPlay }) {
 
 
     return (
-        <div className="group w-64 rounded-2xl bg-zinc-900 p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+        <div className="group w-full rounded-2xl bg-zinc-900 p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
 
 
             <div className="relative">
@@ -21,7 +21,8 @@ export default function MusicCard({ music }) {
                 />
 
 
-                <button className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-black opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110">
+                <button className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-black opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110"
+                    onClick={() => onPlay(music)}>
                     <Play size={22} fill="black" />
                 </button>
             </div>
@@ -40,11 +41,13 @@ export default function MusicCard({ music }) {
 
             <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
+
                     <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-red-500">
                         <Heart size={18} />
                     </button>
 
-                    <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-white">
+                    <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-white"
+                    >
                         <Music2 size={18} />
                     </button>
                 </div>
@@ -52,6 +55,7 @@ export default function MusicCard({ music }) {
                 <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-white">
                     <MoreVertical size={18} />
                 </button>
+
             </div>
         </div>
     );
