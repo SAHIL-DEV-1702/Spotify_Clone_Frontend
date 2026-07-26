@@ -9,13 +9,17 @@ import {
 } from "lucide-react";
 
 
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 
 export default function MusicPlayer({ currentSong, audioRef }) {
+
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
 
     const [isPlaying, setIsPlaying] = useState(true);
 
     const togglePlay = () => {
+
         if (isPlaying) {
             audioRef.current.pause();
         } else {
@@ -25,10 +29,6 @@ export default function MusicPlayer({ currentSong, audioRef }) {
         setIsPlaying(!isPlaying);
     };
 
-    // const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
-
-
     const skipBack = () => {
         audioRef.current.currentTime -= 5
     }
@@ -37,22 +37,23 @@ export default function MusicPlayer({ currentSong, audioRef }) {
         audioRef.current.currentTime += 5
     }
 
-    useEffect(() => {
-        const audio = audioRef.current;
+    const handleSeek = (e) => {
+        const value = Number(e.target.value);
+        audioRef.current.currentTime = value;
+        setCurrentTime(value);
+    };
 
-        const handleLoadedMetadata = () => {
-            setDuration(audio.duration);
-        };
+    const formatTime = (time) => {
 
-        audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+        if (isNaN(time)) return "0:00";
 
-        return () => {
-            audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-        };
+        const minutes = Math.floor(time / 60);
 
+        const seconds = Math.floor(time % 60);
 
-    }, [audioRef, currentSong])
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 
+    };
 
 
     if (!currentSong) return null;
@@ -91,10 +92,10 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                         </button>
 
                         <button className="rounded-full bg-white p-3 text-black hover:scale-105"
-                            onClick={() => togglePlay} >
+                            onClick={togglePlay} >
 
-                            {isPlaying ? <Play size={22} fill="black" />
-                                : <Pause size={22} fill="black" />
+                            {
+                                isPlaying ? <Pause size={22} fill="black" /> : <Play size={22} fill="black" />
                             }
 
                         </button>
@@ -106,17 +107,19 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                     </div>
 
                     <div className="flex w-full items-center gap-3">
-                        <span className="text-xs text-zinc-400">0:00</span>
+                        <span className="text-xs text-zinc-400">{formatTime(currentTime)}</span>
 
                         <input
                             type="range"
-                            min="0"
-                            max="100"
-                            defaultValue="25"
+                            min={0}
+                            max={duration}
+                            value={currentTime}
                             className="w-full accent-green-500"
+                            onInput={handleSeek}
+                            step={0.30}
                         />
 
-                        <span className="text-xs text-zinc-400">{duration}</span>
+                        <span className="text-xs text-zinc-400">{formatTime(duration)}</span>
                     </div>
                 </div>
 
@@ -130,7 +133,6 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                         max="100"
                         defaultValue="70"
                         className="w-28 accent-green-500"
-                        onClick={""}
                     />
                 </div>
 
@@ -139,6 +141,14 @@ export default function MusicPlayer({ currentSong, audioRef }) {
             <audio
                 ref={audioRef}
                 src={currentSong.url}
+                onLoadedMetadata={() => {
+                    setDuration(audioRef.current.duration);
+                }}
+
+                onTimeUpdate={() => {
+                    setCurrentTime(audioRef.current.currentTime);
+                }}
+
                 autoPlay
             />
 
