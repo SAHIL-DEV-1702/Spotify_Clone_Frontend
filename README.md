@@ -1,16 +1,116 @@
-# React + Vite
+# 🎵 Music Streaming App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack Music Streaming Application built using the MERN Stack. Users can register, log in, browse songs, and play music. Admins can upload new songs.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User Registration & Login
+- JWT Authentication using Cookies
+- Browse all songs
+- Music Player with Play/Pause
+- Skip Forward & Skip Back
+- Seek Bar (Progress Slider)
+- Admin-only Music Upload
+- Responsive UI
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
 
-## Expanding the ESLint configuration
+- React
+- React Router
+- Axios
+- Tailwind CSS
+- React Toastify
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- Cookie Parser
+- Multer
+
+## 📂 Project Structure
+
+```
+music-app/
+│
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+│
+└── backend/
+    ├── controllers/
+    ├── routes/
+    ├── middleware/
+    ├── models/
+    └── uploads/
+```
+
+## ⚙️ Installation
+
+### Clone the repository
+
+```bash
+git clone https://github.com/yourusername/music-app.git
+```
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the backend.
+
+```env
+PORT=8000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Create a `.env` file in the frontend.
+
+```env
+VITE_API_URL=http://localhost:8000/api
+```
+
+## 📸 Screenshots
+
+Add screenshots here.
+
+- Home Page
+- Login Page
+- Register Page
+- Upload Music
+- Music Player
+
+## 📌 Future Improvements
+
+- Playlist Feature
+- Like Songs
+- Search Songs
+- User Profile
+- Dark Mode
+- Recently Played
+
+## 👨‍💻 Author
+
+Sahil Patil
