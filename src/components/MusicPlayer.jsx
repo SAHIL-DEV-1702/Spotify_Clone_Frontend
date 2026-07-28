@@ -4,7 +4,7 @@ import {
     Pause,
     SkipBack,
     SkipForward,
-    Volume2,
+
     Heart,
 } from "lucide-react";
 
@@ -28,6 +28,7 @@ export default function MusicPlayer({ currentSong, audioRef }) {
 
         setIsPlaying(!isPlaying);
     };
+
 
     const skipBack = () => {
         audioRef.current.currentTime -= 5
@@ -54,6 +55,9 @@ export default function MusicPlayer({ currentSong, audioRef }) {
         return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 
     };
+
+
+
 
 
     if (!currentSong) return null;
@@ -116,24 +120,15 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                             value={currentTime}
                             className="w-full accent-green-500"
                             onInput={handleSeek}
-                            step={0.30}
+                            step={0.50}
                         />
 
                         <span className="text-xs text-zinc-400">{formatTime(duration)}</span>
                     </div>
                 </div>
 
-
                 <div className="flex w-1/4 items-center justify-end gap-3">
-                    <Volume2 size={20} className="text-zinc-300" />
 
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        defaultValue="70"
-                        className="w-28 accent-green-500"
-                    />
                 </div>
 
             </div>

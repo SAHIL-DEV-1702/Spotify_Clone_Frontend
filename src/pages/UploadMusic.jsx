@@ -14,9 +14,7 @@ export default function UploadMusic() {
         album: "",
         language: "",
         music: "",
-
     });
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;

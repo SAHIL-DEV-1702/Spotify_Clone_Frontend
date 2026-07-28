@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useRef } from "react";
 import MusicPlayer from "../components/MusicPlayer";
 
+
 export default function Home() {
 
     const [musics, setMusics] = useState([])
@@ -41,7 +42,7 @@ export default function Home() {
 
                 <section className="mb-10 rounded-2xl bg-linear-to-r from-green-500 to-emerald-700 p-8">
                     <h1 className="text-4xl font-bold">
-                        Welcome Back 👋
+                        Welcome Back 👋 
                     </h1>
 
                     <p className="mt-3 max-w-xl text-green-100">

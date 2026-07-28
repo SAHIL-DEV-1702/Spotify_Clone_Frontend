@@ -12,23 +12,26 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../service/authApi";
 import { toast } from "react-toastify"
-
+import { useContext } from "react";
+import { AuthContext } from "../contextApi/AuthContext";
 
 export default function Navbar({ role = "user" }) {
 
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
+    console.log(user, "user")
 
-    const onClickHandle = () => {
+    const onClickHandle = async () => {
         try {
-            logout
+            await logout()
+            toast.error("logout Success")
             navigate("/")
-            toast.sucess("logout Success")
+            window.location.href = "/";
         } catch (error) {
             toast.error("not logout yet")
             console.log(error)
         }
     }
-
 
 
     return (
@@ -58,10 +61,12 @@ export default function Navbar({ role = "user" }) {
                             <Link to="/login">Login</Link>
                         </button>
 
-                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
-                            <LogOutIcon size={18} />
-                            Logout
-                        </button>
+                        {
+                            user == null ? "" : <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
+                                <LogOutIcon size={18} />
+                                Logout
+                            </button>
+                        }
                     </nav>
                 </div>
 
