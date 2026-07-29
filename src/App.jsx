@@ -8,6 +8,7 @@ import Home from './pages/Home.jsx'
 import UploadMusic from "./pages/UploadMusic.jsx"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LandingPage from './pages/Landing.jsx'
 
 
 
@@ -20,7 +21,8 @@ function App() {
     <>
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/upload" element={<UploadMusic />} />

@@ -2,14 +2,13 @@ import {
     Search,
     Bell,
     Upload,
-    Home,
     Music2,
     Menu,
     LogOutIcon,
-    LogInIcon,
+
 } from "lucide-react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../service/authApi";
 import { toast } from "react-toastify"
 import { useContext } from "react";
@@ -51,19 +50,11 @@ export default function Navbar({ role = "user" }) {
 
 
                     <nav className="hidden items-center gap-6 lg:flex">
-                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" >
-                            <Home size={18} />
-                            <Link to="/">Home</Link>
-                        </button>
 
-                        <button className="flex items-center gap-2 text-gray-400 transition hover:text-white">
-                            <LogInIcon size={18} />
-                            <Link to="/login">Login</Link>
-                        </button>
 
                         {
                             user == null ? "" : <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
-                                <LogOutIcon size={18} />
+                                <LogOutIcon size={18} color="red" />
                                 Logout
                             </button>
                         }

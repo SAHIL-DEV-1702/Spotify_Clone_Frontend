@@ -3,6 +3,7 @@ import { useState } from "react";
 import { uploadMusic } from "../service/musicApi"
 import { toast } from "react-toastify"
 import { logout } from "../service/authApi";
+import { useNavigate } from "react-router-dom";
 
 
 export default function UploadMusic() {
@@ -25,8 +26,19 @@ export default function UploadMusic() {
         }));
     };
 
-    const onClick = async () => {
-        await logout()
+    const navigate = useNavigate()
+
+    const onClickHandle = async () => {
+
+        try {
+            await logout()
+            toast.error("artist logout Success")
+            navigate("/")
+            window.location.href = "/";
+        } catch (error) {
+            toast.error("not logout yet")
+            console.log(error.response, "error")
+        }
     }
 
     const handleFileChange = (e) => {
@@ -67,7 +79,7 @@ export default function UploadMusic() {
         <div className="min-h-screen bg-zinc-950 px-6 py-10 text-white">
             <div className="mx-auto max-w-4xl">
 
-                <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClick}>
+                <button className="flex items-center gap-2 border-2 px-3 py-2 border-red-500 rounded-lg text-gray-400 transition hover:text-white active:text-red-500" onClick={onClickHandle} >
                     <LogOutIcon size={18} />
                     Logout
                 </button>

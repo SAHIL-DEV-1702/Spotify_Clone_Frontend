@@ -28,7 +28,7 @@ export default function Login() {
             if (res.data.user.role === "artist") {
                 navigate("/upload");
             } else {
-                navigate("/");
+                navigate("/home");
             }
 
             toast.success("Login Success")
