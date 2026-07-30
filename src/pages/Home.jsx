@@ -59,6 +59,20 @@ export default function Home() {
         });
     };
 
+    useEffect(() => {
+        if (currentSong && audioRef.current) {
+
+            audioRef.current.play()
+                .then(() => {
+                    setIsPlaying(true);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+        }
+    }, [currentSong]);
+
     const recommendedSongs = currentSong
         ? musics.filter(
             (song) =>
@@ -166,8 +180,10 @@ export default function Home() {
             <MusicPlayer
                 currentSong={currentSong}
                 audioRef={audioRef}
+                isPlaying={isPlaying}
+                setIsPlaying={setIsPlaying}
+                
             />
-
         </div>
     );
 }

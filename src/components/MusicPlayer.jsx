@@ -20,13 +20,13 @@ export default function MusicPlayer({ currentSong, audioRef }) {
 
     const togglePlay = () => {
 
+        if (!audioRef.current) return;
+
         if (audioRef.current.paused) {
             audioRef.current.play();
-            setIsPlaying(true);
         }
         else {
             audioRef.current.pause();
-            setIsPlaying(false);
         }
 
     }
@@ -146,6 +146,9 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                 }}
 
                 autoPlay
+
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
             />
 
         </footer>
