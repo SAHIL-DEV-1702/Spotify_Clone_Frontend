@@ -15,7 +15,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contextApi/AuthContext";
 
 
-export default function Navbar({ role = "user" }) {
+export default function Navbar({ role = "user", search, setSearch }) {
 
     const navigate = useNavigate()
     const { user, setUser } = useContext(AuthContext)
@@ -71,6 +71,8 @@ export default function Navbar({ role = "user" }) {
                         <Search size={18} className="text-gray-400" />
 
                         <input
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                             type="text"
                             placeholder="Search songs, artists..."
                             className="ml-3 w-full bg-transparent text-white placeholder:text-gray-500 focus:outline-none"

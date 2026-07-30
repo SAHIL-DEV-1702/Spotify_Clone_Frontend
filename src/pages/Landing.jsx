@@ -20,7 +20,6 @@ export default function LandingPage() {
 
             </nav>
 
-            {/* Hero */}
             <section className="mx-auto flex max-w-7xl flex-col items-center px-8 py-24 text-center">
 
                 <h1 className="text-6xl font-bold leading-tight">

@@ -13,7 +13,13 @@ export default function Home() {
 
     const [currentSong, setCurrentSong] = useState(null);
 
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    const [search, setSearch] = useState("");
+
     const audioRef = useRef(null);
+
+    const [recentlyPlayed, setRecentlyPlayed] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,16 +39,44 @@ export default function Home() {
         console.log(currentSong);
     }, [currentSong]);
 
+    const filteredSongs = musics.filter((song) =>
+        song.title.toLowerCase().includes(search.toLowerCase())
+    );
+
+    const handlePlay = (song) => {
+
+        if (currentSong?._id === song._id) {
+            setIsPlaying(prev => !prev);
+        }
+        else {
+            setCurrentSong(song);
+            setIsPlaying(true);
+        }
+
+        setRecentlyPlayed((prev) => {
+            const filtered = prev.filter(item => item._id !== song._id);
+            return [song, ...filtered].slice(0, 10);
+        });
+    };
+
+    const recommendedSongs = currentSong
+        ? musics.filter(
+            (song) =>
+                song.language === currentSong.language &&
+                song._id !== currentSong._id
+        )
+        : [];
 
     return (
         <div className="min-h-screen bg-zinc-950 text-white">
-            <Navbar />
+
+            <Navbar search={search} setSearch={setSearch} />
 
             <main className="mx-auto max-w-7xl px-6 py-8">
 
                 <section className="mb-10 rounded-2xl bg-linear-to-r from-green-500 to-emerald-700 p-8">
                     <h1 className="text-4xl font-bold">
-                        Welcome Back 👋 
+                        Welcome Back 👋
                     </h1>
 
                     <p className="mt-3 max-w-xl text-green-100">
@@ -68,11 +102,12 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {filteredSongs.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
-                                onPlay={setCurrentSong}
+                                onPlay={handlePlay}
+                                currentSong={currentSong}
                             />
                         ))}
                     </div>
@@ -91,11 +126,12 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {recommendedSongs.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
-                                onPlay={setCurrentSong}
+                                onPlay={handlePlay}
+                                currentSong={currentSong}
                             />
                         ))}
                     </div>
@@ -114,11 +150,13 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {musics.map((music) => (
+                        {recentlyPlayed.map((music) => (
                             <MusicCard
                                 key={music._id}
                                 music={music}
-                                onPlay={setCurrentSong}
+                                onPlay={handlePlay}
+                                currentSong={currentSong}
+
                             />
                         ))}
                     </div>
@@ -127,7 +165,9 @@ export default function Home() {
 
             <MusicPlayer
                 currentSong={currentSong}
-                audioRef={audioRef} />
+                audioRef={audioRef}
+            />
+
         </div>
     );
 }

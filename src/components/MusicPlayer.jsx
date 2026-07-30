@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 
-import { useState, } from "react";
+import { useState } from "react";
 
 export default function MusicPlayer({ currentSong, audioRef }) {
 
@@ -20,15 +20,16 @@ export default function MusicPlayer({ currentSong, audioRef }) {
 
     const togglePlay = () => {
 
-        if (isPlaying) {
-            audioRef.current.pause();
-        } else {
+        if (audioRef.current.paused) {
             audioRef.current.play();
+            setIsPlaying(true);
+        }
+        else {
+            audioRef.current.pause();
+            setIsPlaying(false);
         }
 
-        setIsPlaying(!isPlaying);
-    };
-
+    }
 
     const skipBack = () => {
         audioRef.current.currentTime -= 5
