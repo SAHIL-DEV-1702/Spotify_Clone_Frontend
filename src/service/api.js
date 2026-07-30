@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "https://spotify-clone-backend-ccsi.onrender.com",
+    baseURL: import.meta.env.VITE_API_URL,
     withCredentials: true
 });
 
