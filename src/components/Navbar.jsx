@@ -51,17 +51,6 @@ export default function Navbar({ role = "user", search, setSearch }) {
                         </h1>
                     </div>
 
-
-                    <nav className="hidden items-center gap-6 lg:flex">
-
-
-                        {
-                            user == null ? "" : <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
-                                <LogOutIcon size={18} color="red" />
-                                Logout
-                            </button>
-                        }
-                    </nav>
                 </div>
 
 
@@ -103,6 +92,15 @@ export default function Navbar({ role = "user", search, setSearch }) {
                     <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-900 hover:text-white lg:hidden">
                         <Menu size={22} />
                     </button>
+
+                    {
+                        user == null ? "" : <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
+                            <LogOutIcon size={18} color="red" />
+                            Logout
+                        </button>
+                    }
+
+
                 </div>
             </div>
         </header >

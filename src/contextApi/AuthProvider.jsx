@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import { AuthContext } from "./AuthContext";
 
 export const AuthProvider = ({ children }) => {
-    console.log("AuthProvider Rendered");
+
     const [user, setUser] = useState(null);
 
     useEffect(() => {
