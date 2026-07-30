@@ -14,18 +14,21 @@ import { toast } from "react-toastify"
 import { useContext } from "react";
 import { AuthContext } from "../contextApi/AuthContext";
 
+
 export default function Navbar({ role = "user" }) {
 
     const navigate = useNavigate()
-    const { user } = useContext(AuthContext)
-    console.log(user, "user")
+    const { user, setUser } = useContext(AuthContext)
+
 
     const onClickHandle = async () => {
         try {
-            await logout()
-            toast.error("logout Success")
-            navigate("/")
-            window.location.href = "/";
+            await logout();
+            setUser(null);
+            navigate("/");
+            toast.success("logout Success")
+
+
         } catch (error) {
             toast.error("not logout yet")
             console.log(error)

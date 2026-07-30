@@ -37,17 +37,7 @@ function App() {
         limit={1}
       />
 
-      <div className="img-card-container min-h-screen w-full bg-white-40 border-2 border-black flex flex-col justify-center overflow-scroll hide-scrollbar">
 
-
-        <div className='flex gap-8 border-black flex-wrap justify-center-safe'>
-
-
-        </div>
-
-
-
-      </div>
 
 
     </>

@@ -113,7 +113,8 @@ export default function LandingPage() {
 
 
             <footer className="border-t border-zinc-800 py-8 text-center text-zinc-500">
-                © 2026 BeatWave. Made with ❤️ using React & Node.js
+                © 2026. Musicify Made with ❤️ using React & Node.js
+                <p>  patilsahil.dev@gmail.com</p>
             </footer>
 
         </div>
