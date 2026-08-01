@@ -122,7 +122,7 @@ export default function Register() {
 
                     <button
                         type="submit"
-                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-500 py-3 font-semibold text-black transition hover:bg-green-400 active:scale(95) "
+                        className="flex w-full items-center justify-center gap-2 rounded-lg bg-green-500 py-3 font-semibold text-black transition hover:bg-green-400 active:scale(95) hover:scale-95"
                     >
                         <UserPlus size={20} />
                         Register
