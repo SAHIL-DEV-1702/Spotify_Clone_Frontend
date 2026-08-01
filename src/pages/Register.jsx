@@ -31,15 +31,16 @@ export default function Register() {
         e.preventDefault()
         try {
             const res = await register(formdata);
+            navigate("/login")
+            {
+                formdata.role == "user" ? toast.info("user register sucessfully") : toast.info("user register sucessfully");
+                console.log(res);
 
-            { (formdata.user === "User||user" ? navigate("/Home") : navigate("/upload")) }
+            }
+        }
+        catch (err) {
 
-            toast.info("register sucessfully");
-            console.log(res);
-
-        } catch (err) {
-
-            console.log(err.response.status, err.response.data);
+            console.log(err);
         }
     }
 

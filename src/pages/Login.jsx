@@ -34,8 +34,7 @@ export default function Login() {
             toast.success("Login Success")
 
         } catch (error) {
-            console.log(error.response)
-            console.log(error.response.data)
+            console.log(error.response.data);
             toast.error(error.response?.data?.message);
         }
     }
@@ -48,8 +47,6 @@ export default function Login() {
     const passwordHandle = (e) => {
         setPassword(e.target.value)
     }
-
-
 
     return (
         <>
@@ -111,7 +108,7 @@ export default function Login() {
                     </form>
 
                     <p className="mt-6 text-center text-zinc-400">
-                        Don't have an account?{" "}
+                        Don't have an account?
                         <Link
                             to="/register"
                             className="font-medium text-green-500 hover:underline"
