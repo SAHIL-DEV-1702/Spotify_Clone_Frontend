@@ -27,15 +27,17 @@ export default function Login() {
 
             if (res.data.user.role === "artist") {
                 navigate("/upload");
+                toast.success("redirect to upload")
             } else {
                 navigate("/home");
+                toast.success("redirect to home")
             }
 
             toast.success("Login Success")
 
         } catch (error) {
-            console.log(error.response);
-
+            console.log(error.response.message);
+            toast.error(error.response?.data?.message || "Something went wrong")
         }
     }
 
