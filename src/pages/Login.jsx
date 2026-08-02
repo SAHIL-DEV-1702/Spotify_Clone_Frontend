@@ -33,7 +33,6 @@ export default function Login() {
                 toast.success("redirect to home")
             }
 
-            toast.success("Login Success")
 
         } catch (error) {
             console.log(error.response.message);
