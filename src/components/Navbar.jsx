@@ -94,7 +94,7 @@ export default function Navbar({ role = "user", search, setSearch }) {
                     </button>
 
                     {
-                        user == null ? "" : <button className="flex items-center gap-2 text-gray-400 transition hover:text-white" onClick={onClickHandle}>
+                        user == null ? "" : <button className="flex border-red-500 px-2 py-2 rounded-xl border-2 items-center gap-2 text-gray-400 transition hover:text-white active:scale-95" onClick={onClickHandle}>
                             <LogOutIcon size={18} color="red" />
                             Logout
                         </button>

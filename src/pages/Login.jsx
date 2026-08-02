@@ -25,7 +25,7 @@ export default function Login() {
             setUser(res.data.user);
             console.log(user, "user")
 
-            if (res.data.user === "artist") {
+            if (res.data.user.role === "artist") {
                 navigate("/upload");
             } else {
                 navigate("/home");
@@ -34,7 +34,7 @@ export default function Login() {
             toast.success("Login Success")
 
         } catch (error) {
-            console.log(error);
+            console.log(error.response);
 
         }
     }

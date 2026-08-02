@@ -4,8 +4,8 @@ import {
     Pause,
     SkipBack,
     SkipForward,
-
     Heart,
+    Volume2,
 } from "lucide-react";
 
 
@@ -17,6 +17,7 @@ export default function MusicPlayer({ currentSong, audioRef }) {
     const [duration, setDuration] = useState(0);
 
     const [isPlaying, setIsPlaying] = useState(true);
+    const [volume, setVolume] = useState(0.5);
 
     const togglePlay = () => {
 
@@ -43,6 +44,13 @@ export default function MusicPlayer({ currentSong, audioRef }) {
         const value = Number(e.target.value);
         audioRef.current.currentTime = value;
         setCurrentTime(value);
+    };
+
+    const handleVolumeChange = (e) => {
+        const value = Number(e.target.value);
+        if (!audioRef.current) return;
+        audioRef.current.volume = value;
+        setVolume(value);
     };
 
     const formatTime = (time) => {
@@ -129,7 +137,17 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                 </div>
 
                 <div className="flex w-1/4 items-center justify-end gap-3">
+                    <Volume2 size={18} className="text-zinc-400" />
+                    <input
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={volume}
+                        onChange={handleVolumeChange}
+                        className="w-24 accent-green-500"
 
+                    />
                 </div>
 
             </div>
