@@ -11,7 +11,7 @@ export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -23,9 +23,9 @@ export default function Login() {
             const res = await login({ email, password })
 
             setUser(res.data.user);
-            console.log(res.data.user)
+            console.log(user, "user")
 
-            if (res.data.user.role === "artist") {
+            if (res.data.user === "artist") {
                 navigate("/upload");
             } else {
                 navigate("/home");
@@ -34,8 +34,8 @@ export default function Login() {
             toast.success("Login Success")
 
         } catch (error) {
-            console.log(error.response.data);
-            toast.error(error.response?.data?.message);
+            console.log(error);
+
         }
     }
 
