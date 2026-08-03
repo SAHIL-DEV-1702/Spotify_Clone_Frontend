@@ -113,30 +113,30 @@ music-streaming-app/
 
 ### 🏠 Home Page
 
-![Home](/public/image/HomePage.png)
+![Home](public/images/HomePage.png)
 
 ---
 
 ### 🔐 Login Page
 
-![Login](Login.png)
+![Login](public/images/Login.png)
 
 ---
 
 ### 📝 Register Page
 
-![Register](RegisterPage.png)
+![Register](public/images/RegisterPage.png)
 
 ---
 
 ### ⬆️ Upload Music (Admin)
 
-![Upload](UploadPage.png)
+![Upload](public/images/UploadPage.png)
 
 ---
 ### 📱 Responsive Design
 
-![Responsive](Responsive.png)
+![Responsive](public/images/Responsive.png)
 
 ---
 
