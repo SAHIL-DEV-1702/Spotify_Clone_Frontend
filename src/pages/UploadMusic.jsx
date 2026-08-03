@@ -225,11 +225,13 @@ export default function UploadMusic() {
 
                 <div>
 
-                    <MusicCard />
+                    <MusicCard
+                        music={"hello"}
+                        title="hello"
+                        artist="hey"
+                    />
 
                 </div>
-
-
 
             </div>
         </>
