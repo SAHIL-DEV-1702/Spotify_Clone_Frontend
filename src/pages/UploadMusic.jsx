@@ -4,6 +4,7 @@ import { uploadMusic } from "../service/musicApi"
 import { toast } from "react-toastify"
 import { logout } from "../service/authApi";
 import { useNavigate } from "react-router-dom";
+import MusicCard from "../components/MusicCard";
 
 
 export default function UploadMusic() {
@@ -211,6 +212,20 @@ export default function UploadMusic() {
                                 "Upload Music"
                             )}
                         </button>
+                    </div>
+
+                    <div>
+
+                        <h1>music uploaded by particular artists</h1>
+
+                        <div>
+
+                            <MusicCard />
+
+                        </div>
+                        
+
+
                     </div>
 
                 </form>
