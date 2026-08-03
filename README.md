@@ -119,7 +119,7 @@ music-streaming-app/
 
 ### 🔐 Login Page
 
-![Login](public/images/Login.png)
+![Login](public/images/LoginPage.png)
 
 ---
 
