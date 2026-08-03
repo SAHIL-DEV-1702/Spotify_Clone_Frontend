@@ -99,7 +99,7 @@ music-streaming-app/
 │   ├── routes/
 │   ├── uploads/
 │   ├── config/
-│   ├── server.js
+│   ├── app.js
 │   └── package.json
 │
 ├── screenshots/
@@ -142,33 +142,31 @@ music-streaming-app/
 
 ## 🚀 Installation
 
-### Clone Repository
+### Clone the Frontend Repository
 
 ```bash
-git clone https://github.com/SAHIL-DEV-1702/music-streaming-app.git
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Frontend.git
 ```
 
-Move into the project directory:
+Move into the frontend project directory:
 
 ```bash
-cd music-streaming-app
-```
-
-Install frontend dependencies:
-
-```bash
-cd client
+cd Spotify_Clone_Frontend
 npm install
 ```
 
-Install backend dependencies:
+### Clone the Backend Repository
 
 ```bash
-cd ../server
-npm install
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Backend.git
 ```
 
----
+Move into the backend project directory:
+
+```bash
+cd Spotify_Clone_Backend
+npm install
+```
 
 ## ⚙️ Environment Variables
 
@@ -189,44 +187,28 @@ JWT_SECRET=your_secret_key
 ### Backend
 
 ```bash
-cd server
+cd Spotify_Clone_Backend
 npm run dev
 ```
 
 ### Frontend
 
 ```bash
-cd client
+cd Spotify_Clone_Frontend
 npm run dev
 ```
 
 Frontend:
 
-```
+```text
 http://localhost:5173
 ```
 
 Backend:
 
-```
+```text
 http://localhost:8000
 ```
-
----
-
-## 🔐 Authentication
-
-The application uses **JWT Authentication** stored securely in cookies.
-
-### User Authentication Flow
-
-- Register
-- Login
-- Receive JWT Token
-- Access Protected Routes
-- Logout
-
----
 
 ## 📡 API Endpoints
 
