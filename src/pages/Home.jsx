@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
+import { deleteMusic as apiDeleteMusic } from "../service/musicApi";
 import { getAllMusic } from "../service/musicApi";
 import { toast } from "react-toastify";
 import { useRef } from "react";
@@ -57,6 +58,17 @@ export default function Home() {
             const filtered = prev.filter(item => item._id !== song._id);
             return [song, ...filtered].slice(0, 10);
         });
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await apiDeleteMusic(id);
+            setMusics((prev) => prev.filter((m) => m._id !== id));
+            toast.success("Music deleted successfully");
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response?.data?.message || "Failed to delete music");
+        }
     };
 
     useEffect(() => {
@@ -121,6 +133,7 @@ export default function Home() {
                                 key={music._id}
                                 music={music}
                                 onPlay={handlePlay}
+                                onDelete={handleDelete}
                                 currentSong={currentSong}
                             />
                         ))}
@@ -145,6 +158,7 @@ export default function Home() {
                                 key={music._id}
                                 music={music}
                                 onPlay={handlePlay}
+                                onDelete={handleDelete}
                                 currentSong={currentSong}
                             />
                         ))}
@@ -169,6 +183,7 @@ export default function Home() {
                                 key={music._id}
                                 music={music}
                                 onPlay={handlePlay}
+                                onDelete={handleDelete}
                                 currentSong={currentSong}
 
                             />
@@ -182,7 +197,7 @@ export default function Home() {
                 audioRef={audioRef}
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
-                
+
             />
         </div>
     );

@@ -3,12 +3,24 @@ import {
     Heart,
     MoreVertical,
     Music2,
+    Trash,
 } from "lucide-react";
+import { useContext } from "react";
+import { AuthContext } from "../contextApi/AuthContext";
 
 
-export default function MusicCard({ music, onPlay }) {
+export default function MusicCard({ music, onPlay, onDelete, currentSong }) {
 
-   
+    const { user } = useContext(AuthContext);
+
+    const isOwner = !!(user && user.role === 'artist' && (
+        user._id === music.artist?._id ||
+        user.id === music.artist?._id ||
+        user._id === music.artist ||
+        user.id === music.artist
+    ));
+
+
 
     return (
         <div className="group w-full rounded-2xl bg-zinc-900 p-4 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
@@ -24,9 +36,9 @@ export default function MusicCard({ music, onPlay }) {
 
                 <button className="absolute bottom-3 right-3 flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-black opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hover:scale-110"
                     onClick={() => onPlay(music)}>
-                    
+
                     <Play size={22} fill="black" />
-                    
+
                 </button>
             </div>
 
@@ -55,9 +67,24 @@ export default function MusicCard({ music, onPlay }) {
                     </button>
                 </div>
 
-                <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-white">
-                    <MoreVertical size={18} />
-                </button>
+                <div className="flex items-center gap-2">
+                    {isOwner && (
+                        <button
+                            onClick={() => {
+                                if (onDelete && window.confirm("Are you sure you want to delete this music?")) {
+                                    onDelete(music._id);
+                                }
+                            }}
+                            className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-red-500"
+                        >
+                            <Trash size={18} />
+                        </button>
+                    )}
+
+                    <button className="rounded-full p-2 text-gray-400 transition hover:bg-zinc-800 hover:text-white">
+                        <MoreVertical size={18} />
+                    </button>
+                </div>
 
             </div>
         </div>
