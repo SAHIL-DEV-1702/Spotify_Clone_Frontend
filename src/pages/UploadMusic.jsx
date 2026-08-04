@@ -241,13 +241,14 @@ export default function UploadMusic() {
                 <h1>music uploaded by particular artists</h1>
 
                 <div>
-                    {Array.isArray(music) && music.length > 0 ? (
+                    <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">  {Array.isArray(music) && music.length > 0 ? (
                         music.map((e) => (
                             <MusicCard key={e._id} music={e} />
                         ))
                     ) : (
                         <h3 className="text-zinc-400">No uploaded music found yet.</h3>
                     )}
+                    </div>
                 </div>
 
             </div>
