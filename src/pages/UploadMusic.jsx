@@ -1,6 +1,6 @@
 import { Music2, UploadCloud, LogOutIcon } from "lucide-react";
-import { useState } from "react";
-import { uploadMusic } from "../service/musicApi"
+import { useState, useEffect } from "react";
+import { uploadMusic, getMyMusics } from "../service/musicApi"
 import { toast } from "react-toastify"
 import { logout } from "../service/authApi";
 import { useNavigate } from "react-router-dom";
@@ -75,6 +75,22 @@ export default function UploadMusic() {
         }
 
     };
+
+    const [musics, setMusics] = useState([]);
+
+    useEffect(() => {
+        const fetchMyMusics = async () => {
+            try {
+                const res = await getMyMusics();
+                setMusics(res.data.musics);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchMyMusics();
+    }, []);
+
 
     return (
         <>
@@ -225,11 +241,15 @@ export default function UploadMusic() {
 
                 <div>
 
-                    <MusicCard
-                        music={"hello"}
-                        title="hello"
-                        artist="hey"
-                    />
+                    {
+                        musics.map(
+                            (music) =>
+                                <MusicCard key={music._id}
+                                    music={music} />
+
+                        )
+
+                    }
 
                 </div>
 
