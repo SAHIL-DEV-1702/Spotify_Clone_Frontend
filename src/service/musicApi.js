@@ -16,7 +16,9 @@ export const deleteMusic = (id) =>
 export const getMusicById = (id) =>
     API.get(`/music/${id}`);
 
-
+export const getMyMusics = () => {
+     API.get("/music/my-musics");
+};
 
 
 
