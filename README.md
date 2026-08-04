@@ -99,7 +99,7 @@ music-streaming-app/
 │   ├── routes/
 │   ├── uploads/
 │   ├── config/
-│   ├── server.js
+│   ├── app.js
 │   └── package.json
 │
 ├── screenshots/
@@ -113,69 +113,60 @@ music-streaming-app/
 
 ### 🏠 Home Page
 
-![Home](screenshots/home.png)
+![Home](public/images/HomePage.png)
 
 ---
 
 ### 🔐 Login Page
 
-![Login](screenshots/login.png)
+![Login](public/images/LoginPage.png)
 
 ---
 
 ### 📝 Register Page
 
-![Register](screenshots/register.png)
+![Register](public/images/RegisterPage.png)
 
 ---
 
 ### ⬆️ Upload Music (Admin)
 
-![Upload](screenshots/upload.png)
+![Upload](public/images/UploadPage.png)
 
 ---
-
-### 🎵 Music Player
-
-![Music Player](screenshots/player.png)
-
----
-
 ### 📱 Responsive Design
 
-![Responsive](screenshots/mobile.png)
+![Responsive](public/images/Responsive.png)
 
 ---
 
 ## 🚀 Installation
 
-### Clone Repository
+### Clone the Frontend Repository
 
 ```bash
-git clone https://github.com/SAHIL-DEV-1702/music-streaming-app.git
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Frontend.git
 ```
 
-Move into the project directory:
+Move into the frontend project directory:
 
 ```bash
-cd music-streaming-app
-```
-
-Install frontend dependencies:
-
-```bash
-cd client
+cd Spotify_Clone_Frontend
 npm install
 ```
 
-Install backend dependencies:
+### Clone the Backend Repository
 
 ```bash
-cd ../server
-npm install
+git clone https://github.com/SAHIL-DEV-1702/Spotify_Clone_Backend.git
 ```
 
----
+Move into the backend project directory:
+
+```bash
+cd Spotify_Clone_Backend
+npm install
+```
 
 ## ⚙️ Environment Variables
 
@@ -188,52 +179,33 @@ MONGO_URI=your_mongodb_connection_string
 
 JWT_SECRET=your_secret_key
 ```
-
----
-
 ## ▶️ Running the Project
 
 ### Backend
 
 ```bash
-cd server
+cd Spotify_Clone_Backend
 npm run dev
 ```
 
 ### Frontend
 
 ```bash
-cd client
+cd Spotify_Clone_Frontend
 npm run dev
 ```
 
 Frontend:
 
-```
+```text
 http://localhost:5173
 ```
 
 Backend:
 
-```
+```text
 http://localhost:8000
 ```
-
----
-
-## 🔐 Authentication
-
-The application uses **JWT Authentication** stored securely in cookies.
-
-### User Authentication Flow
-
-- Register
-- Login
-- Receive JWT Token
-- Access Protected Routes
-- Logout
-
----
 
 ## 📡 API Endpoints
 
