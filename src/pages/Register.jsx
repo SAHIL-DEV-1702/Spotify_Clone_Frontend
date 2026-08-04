@@ -32,15 +32,16 @@ export default function Register() {
         try {
             const res = await register(formdata);
             navigate("/login")
-            {
-                formdata.role == "user" ? toast.info("user register sucessfully") : toast.info("user register sucessfully");
-                console.log(res);
-
-            }
+            toast.success("User registered successfully");
+            console.log(res);
         }
         catch (err) {
-
             console.log(err);
+            toast.error(
+                err.response?.data?.message ||
+                err.response?.data?.errors?.[0]?.msg ||
+                "Registration failed"
+            );
         }
     }
 

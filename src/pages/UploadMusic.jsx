@@ -1,6 +1,6 @@
 import { Music2, UploadCloud, LogOutIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { uploadMusic, getMyMusics } from "../service/musicApi"
+import { uploadMusic, getMyMusics, deleteMusic } from "../service/musicApi"
 import { toast } from "react-toastify"
 import { logout } from "../service/authApi";
 import { useNavigate } from "react-router-dom";
@@ -74,6 +74,17 @@ export default function UploadMusic() {
             setLoading(false);
         }
 
+    };
+
+    const handleDelete = async (id) => {
+        try {
+            await deleteMusic(id);
+            setMusic((prev) => prev.filter((item) => item._id !== id));
+            toast.success("Music deleted successfully");
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response?.data?.message || "Failed to delete music");
+        }
     };
 
     const [music, setMusic] = useState([]);
@@ -243,7 +254,7 @@ export default function UploadMusic() {
                 <div>
                     <div className="grid grid-cols-2 gap-10 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">  {Array.isArray(music) && music.length > 0 ? (
                         music.map((e) => (
-                            <MusicCard key={e._id} music={e} />
+                            <MusicCard key={e._id} music={e} onDelete={handleDelete} />
                         ))
                     ) : (
                         <h3 className="text-zinc-400">No uploaded music found yet.</h3>
