@@ -76,13 +76,13 @@ export default function UploadMusic() {
 
     };
 
-    const [musics, setMusics] = useState([]);
+    const [music, setMusic] = useState([]);
 
     useEffect(() => {
         const fetchMyMusics = async () => {
             try {
                 const res = await getMyMusics();
-                setMusics(res.data.musics);
+                setMusic(res.data.musics);
             } catch (error) {
                 console.log(error);
             }
@@ -188,7 +188,7 @@ export default function UploadMusic() {
                                     {formData.music ? (<p className="mt-2 text-sm text-zinc-400">
                                         {formData.music.name}
                                     </p>) : (<p className="mt-2 text-sm text-zinc-400">
-                                        Click to browse or drag & drop your music here
+                                        Click to browse or drag & drop your music here --
                                     </p>)}
                                 </div>
 
@@ -241,11 +241,11 @@ export default function UploadMusic() {
 
                 <div>
 
-                    {
-                        musics.map(
-                            (music) =>
-                                <MusicCard key={music._id}
-                                    music={music} />
+                    {music == "null" ? <h3>Not Found!</h3> :
+                        music.map(
+                            (e) =>
+                                <MusicCard key={e._id}
+                                    music={e} />
 
                         )
 
