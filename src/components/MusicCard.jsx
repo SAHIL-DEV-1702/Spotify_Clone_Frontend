@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { AuthContext } from "../contextApi/AuthContext";
 
 
-export default function MusicCard({ music, onPlay, onDelete, currentSong }) {
+export default function MusicCard({ music, onPlay, onDelete }) {
 
     const { user } = useContext(AuthContext);
 

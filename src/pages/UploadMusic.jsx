@@ -82,9 +82,10 @@ export default function UploadMusic() {
         const fetchMyMusics = async () => {
             try {
                 const res = await getMyMusics();
-                setMusic(res.data.musics);
+                setMusic(res?.data?.musics || []);
             } catch (error) {
                 console.log(error);
+                setMusic([]);
             }
         };
 
@@ -240,17 +241,13 @@ export default function UploadMusic() {
                 <h1>music uploaded by particular artists</h1>
 
                 <div>
-
-                    {music == "null" ? <h3>Not Found!</h3> :
-                        music.map(
-                            (e) =>
-                                <MusicCard key={e._id}
-                                    music={e} />
-
-                        )
-
-                    }
-
+                    {Array.isArray(music) && music.length > 0 ? (
+                        music.map((e) => (
+                            <MusicCard key={e._id} music={e} />
+                        ))
+                    ) : (
+                        <h3 className="text-zinc-400">No uploaded music found yet.</h3>
+                    )}
                 </div>
 
             </div>

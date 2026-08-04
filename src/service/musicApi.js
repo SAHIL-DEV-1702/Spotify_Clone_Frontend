@@ -17,7 +17,7 @@ export const getMusicById = (id) =>
     API.get(`/music/${id}`);
 
 export const getMyMusics = () => {
-     API.get("/music/my-musics");
+    return API.get("/music/my-musics");
 };
 
 
