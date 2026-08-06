@@ -68,7 +68,7 @@ export default function UploadMusic() {
         }
         catch (error) {
             console.log(error)
-            toast.error("Upload Failed");
+            toast.error(error.response?.data?.message || error.message || "Upload Failed");
         }
         finally {
             setLoading(false);
