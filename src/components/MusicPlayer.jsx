@@ -71,8 +71,8 @@ export default function MusicPlayer({ currentSong, audioRef }) {
 
     if (!currentSong) return null;
     return (
-        <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-950 px-6 py-4">
-            <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-950 px-3 py-3 sm:px-6 sm:py-4">
+            <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
 
                 <div className="flex w-1/4 items-center gap-4">
