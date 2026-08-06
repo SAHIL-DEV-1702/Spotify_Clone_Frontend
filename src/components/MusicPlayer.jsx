@@ -75,15 +75,15 @@ export default function MusicPlayer({ currentSong, audioRef }) {
             <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
 
-                <div className="flex w-1/4 items-center gap-4">
+                <div className="flex w-full items-center gap-3 sm:w-1/4">
                     <img
                         src="https://picsum.photos/80"
                         alt="cover"
                         className="h-14 w-14 rounded-lg object-cover"
                     />
 
-                    <div>
-                        <h3 className="font-semibold text-white">
+                    <div className="flex-1 min-w-0">
+                        <h3 className="truncate font-semibold text-white">
                             {currentSong.title}
                         </h3>
 
