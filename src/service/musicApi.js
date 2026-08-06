@@ -1,24 +1,14 @@
 import API from "../service/api"
 
-
-
 export const getAllMusic = () => API.get("/music/getallmusic");
 
+export const uploadMusic = (formData) => API.post("/music/uploadmusic", formData);
 
-export const uploadMusic = (formData) =>
-    API.post("/music/uploadmusic", formData);
+export const deleteMusic = (id) => API.delete(`/music/${id}`);
 
+export const getMusicById = (id) => API.get(`/music/${id}`);
 
-export const deleteMusic = (id) =>
-    API.delete(`/music/${id}`);
-
-
-export const getMusicById = (id) =>
-    API.get(`/music/${id}`);
-
-export const getMyMusics = () => {
-    return API.get("/music/my-musics");
-};
+export const getMyMusics = () => {return API.get("/music/my-musics");};
 
 
 
