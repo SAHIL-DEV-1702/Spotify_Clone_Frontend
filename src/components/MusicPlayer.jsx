@@ -127,7 +127,7 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                             min={0}
                             max={duration}
                             value={currentTime}
-                            className="w-full accent-green-500"
+                            className="flex-1 accent-green-500 "
                             onInput={handleSeek}
                             step={0.50}
                         />
