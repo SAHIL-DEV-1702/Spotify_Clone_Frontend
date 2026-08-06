@@ -31,6 +31,7 @@ export default function MusicCard({ music, onPlay, onDelete }) {
                     src="https://picsum.photos/300/"
                     alt="cover"
                     className="aspect-square w-full rounded-xl object-cover"
+                    onClick={() => onPlay(music)}
                 />
 
 
