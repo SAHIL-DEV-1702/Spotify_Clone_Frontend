@@ -98,7 +98,7 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                 </div>
 
 
-                <div className="flex w-2/4 flex-col items-center">
+                <div className="flex justify-between w-2/4 flex-col items-center">
                     <div className="mb-2 flex items-center gap-6">
                         <button className="text-zinc-300 hover:text-white" onClick={skipBack}>
                             <SkipBack size={22} />
