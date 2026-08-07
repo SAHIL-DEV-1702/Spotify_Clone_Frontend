@@ -29,7 +29,6 @@ export default function MusicPlayer({ currentSong, audioRef }) {
         else {
             audioRef.current.pause();
         }
-
     }
 
     const skipBack = () => {
@@ -71,7 +70,8 @@ export default function MusicPlayer({ currentSong, audioRef }) {
 
     if (!currentSong) return null;
     return (
-        <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-950 px-3 py-3 sm:px-6 sm:py-4">
+        <footer className=" flex flex-col justify-center fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-800 bg-zinc-950 px-3 py-3 sm:px-6 sm:py-4">
+
             <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
 
@@ -98,7 +98,7 @@ export default function MusicPlayer({ currentSong, audioRef }) {
                 </div>
 
 
-                <div className="flex justify-between w-2/4 flex-col items-center">
+                <div className="flex justify-center w-2/4 flex-col items-center">
                     <div className="mb-2 flex items-center gap-6">
                         <button className="text-zinc-300 hover:text-white" onClick={skipBack}>
                             <SkipBack size={22} />
