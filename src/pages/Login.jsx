@@ -30,12 +30,20 @@ export default function Login() {
                 toast.success("redirect to upload")
             } else {
                 navigate("/home");
+
                 toast.success("redirect to home")
             }
 
 
         } catch (error) {
             console.log(error.response.message);
+            if (error.response?.status === 429) {
+                toast.error(
+                    error.response?.data?.message ||
+                    "Too many login attempts. Please try again later."
+                );
+                return;
+            }
             toast.error(error.response?.data?.message || "Something went wrong")
         }
     }

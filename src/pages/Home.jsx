@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
 import MusicCard from "../components/MusicCard";
 import { deleteMusic as apiDeleteMusic } from "../service/musicApi";
 import { getAllMusic } from "../service/musicApi";
 import { toast } from "react-toastify";
-import { useRef } from "react";
 import MusicPlayer from "../components/MusicPlayer";
+import Loader from "../components/Loader";
 
 
 export default function Home() {
@@ -22,21 +22,66 @@ export default function Home() {
 
     const [recentlyPlayed, setRecentlyPlayed] = useState([]);
 
+    const [page, setPage] = useState(1);
+
+    const [hasMore, setHasMore] = useState(true);
+
+    const [loading, setLoading] = useState(false);
+
+    const loaderRef = useRef(null);
+
+
+
+
+
     useEffect(() => {
+
         const fetchData = async () => {
             try {
-                const res = await getAllMusic()
-                setMusics(res.data.musics);
+                const res = await getAllMusic(page, 20)
+                setMusics((prev) => [...prev, ...res.data.musics]);
+                setHasMore(res.data.hasMore);
+                setLoading(true);
                 console.log(res.data.musics, "musics log")
                 console.log(res.data, "data")
             } catch (error) {
-                toast(error.repsponse?.data?.messege)
+                toast(error.response?.data?.messege)
+            }
+            finally {
+                setLoading(false);
             }
         };
         fetchData();
-    }, []);
+
+    }, [page]);
+
+
 
     useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && hasMore && !loading) {
+                    setPage((prev) => prev + 1);
+                }
+            },
+            {
+                rootMargin: "200px",
+            }
+        );
+
+        if (loaderRef.current) {
+            observer.observe(loaderRef.current);
+        }
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [hasMore, loading]);
+
+
+
+    useEffect(() => {
+
         console.log(currentSong);
     }, [currentSong]);
 
@@ -58,7 +103,9 @@ export default function Home() {
             const filtered = prev.filter(item => item._id !== song._id);
             return [song, ...filtered].slice(0, 10);
         });
+
     };
+
 
     const handleDelete = async (id) => {
         try {
@@ -70,6 +117,7 @@ export default function Home() {
             toast.error(error.response?.data?.message || "Failed to delete music");
         }
     };
+
 
     useEffect(() => {
         if (currentSong && audioRef.current) {
@@ -84,6 +132,7 @@ export default function Home() {
 
         }
     }, [currentSong]);
+
 
     const recommendedSongs = currentSong
         ? musics.filter(
@@ -137,7 +186,13 @@ export default function Home() {
                                 currentSong={currentSong}
                             />
                         ))}
+
+                        <div ref={loaderRef} className="h-10">
+                            {loading && <Loader />}
+                        </div>
+
                     </div>
+
                 </section>
 
 
