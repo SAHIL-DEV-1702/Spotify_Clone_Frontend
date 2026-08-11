@@ -18,6 +18,8 @@ export default function Home() {
 
     const [search, setSearch] = useState("");
 
+    const [debouncedSearch, setDebouncedSearch] = useState("");
+
     const audioRef = useRef(null);
 
     const [recentlyPlayed, setRecentlyPlayed] = useState([]);
@@ -31,7 +33,15 @@ export default function Home() {
     const loaderRef = useRef(null);
 
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(search);
+        }, 500);
 
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [search]);
 
 
     useEffect(() => {
@@ -87,7 +97,7 @@ export default function Home() {
     }, [currentSong]);
 
     const filteredSongs = musics.filter((song) =>
-        song.title.toLowerCase().includes(search.toLowerCase())
+        song.title.toLowerCase().includes(debouncedSearch.toLowerCase())
     );
 
     const handlePlay = (song) => {
