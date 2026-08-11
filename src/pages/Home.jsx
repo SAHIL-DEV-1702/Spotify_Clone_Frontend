@@ -187,11 +187,10 @@ export default function Home() {
                                 currentSong={currentSong}
                             />
                         ))}
+                    </div>
 
-                        <div ref={loaderRef} className="h-10">
-                            {loading && <Loader />}
-                        </div>
-
+                    <div ref={loaderRef} className="h-10 flex justify-center">
+                        {loading && <Loader />}
                     </div>
 
                 </section>
