@@ -38,10 +38,11 @@ export default function Home() {
 
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const res = await getAllMusic(page, 20)
                 setMusics((prev) => [...prev, ...res.data.musics]);
                 setHasMore(res.data.hasMore);
-                setLoading(true);
+
                 console.log(res.data.musics, "musics log")
                 console.log(res.data, "data")
             } catch (error) {
@@ -65,7 +66,7 @@ export default function Home() {
                 }
             },
             {
-                rootMargin: "200px",
+                threshold: 1,
             }
         );
 
