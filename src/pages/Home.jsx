@@ -66,7 +66,7 @@ export default function Home() {
                 }
             },
             {
-                threshold: 1,
+                rootMargin: "200px",
             }
         );
 
