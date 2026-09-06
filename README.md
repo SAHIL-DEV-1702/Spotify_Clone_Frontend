@@ -10,6 +10,12 @@
 A full-stack **Music Streaming Application** built with **React**, **Node.js**, **Express.js**, and **MongoDB**. The application provides secure authentication, role-based authorization, music playback, and an admin panel for uploading songs.
 
 ---
+## 🌐 Live Demo
+
+🔗 **Musicify – Live Application:**  
+    https://musicifys.netlify.app/
+
+> Try the application live and explore the music streaming features.
 
 ## 📖 Overview
 
